@@ -12,6 +12,17 @@ import com.codingwithmitch.foodrecipes.requests.RecipeApiClient;
 
 import java.util.List;
 
+/***
+ * - Repo acts as a hub for the data.
+ * It acts as an intermediary between Viewmodel and different data source.
+ * - If the data is coming from the network then the repo will ask the network for the data
+ * and if it coming from cache then it will ask cache for the data
+ *
+ *
+ */
+
+
+
 public class RecipeRepository {
 
     private static RecipeRepository instance;
@@ -81,6 +92,7 @@ public class RecipeRepository {
 
     public void searchRecipesApi(String query, int pageNumber){
         if(pageNumber == 0){
+            // default page number, page 0 doesn't exist in the api response
             pageNumber = 1;
         }
         mQuery = query;

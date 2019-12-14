@@ -92,6 +92,7 @@ public class RecipeApiClient {
 
     }
 
+    // runnable for search query
     private class RetrieveRecipesRunnable implements Runnable{
 
         private String query;
@@ -114,6 +115,7 @@ public class RecipeApiClient {
                 if(response.code() == 200){
                     List<Recipe> list = new ArrayList<>(((RecipeSearchResponse)response.body()).getRecipes());
                     if(pageNumber == 1){
+                        // post if for the background thread. And setValue is to set a value that is not in a background thread
                         mRecipes.postValue(list);
                     }
                     else{
@@ -134,6 +136,7 @@ public class RecipeApiClient {
 
         }
 
+        // for retrofit
         private Call<RecipeSearchResponse> getRecipes(String query, int pageNumber){
             return ServiceGenerator.getRecipeApi().searchRecipe(
                     Constants.API_KEY,
@@ -148,6 +151,7 @@ public class RecipeApiClient {
         }
     }
 
+    // search by id
     private class RetrieveRecipeRunnable implements Runnable{
 
         private String recipeId;
